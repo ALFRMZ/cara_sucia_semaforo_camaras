@@ -1,0 +1,172 @@
+
+
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+  <title>CARA SUCIA</title>
+
+  <link rel="stylesheet"
+    href="https://js.arcgis.com/4.33/esri/themes/light/main.css">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <header class="encabezado">
+
+    <div class="identidad">
+     
+
+      <div>
+        <h1>CARA SUCIA</h1>
+        <p>Propuesta de implementacion de Semáforos y Cámaras</p>
+      </div>
+    </div>
+
+    <div class="indicadores-header">
+      <div class="indicador-sistema">
+        <span class="punto-estado"></span>
+        <span id="estadoSistema">Conectando mapa</span>
+      </div>
+
+      <div class="reloj-sistema">
+        <span id="fechaActual"></span>
+        <strong id="horaActual"></strong>
+      </div>
+    </div>
+
+  </header>
+
+  <main id="areaTrabajo">
+
+    <div id="viewDiv"></div>
+
+    <!-- ETIQUETA DEL MAPA -->
+    <div class="etiqueta-mapa">
+      <span class="etiqueta-punto"></span>
+      VISOR GEOGRÁFICO
+    </div>
+
+    <!-- VENTANA DE VIDEO -->
+    <section
+      id="panelVideo"
+      class="ventana ventana-video oculto">
+
+      <div class="barra-ventana" id="barraVideo">
+
+        <div class="titulo-ventana">
+          <span class="icono-ventana">▶</span>
+
+          <div>
+            <small>VISUALIZACIÓN DE VIDEO</small>
+            <h2 id="tituloVideo">Cámara de monitoreo</h2>
+          </div>
+        </div>
+
+        <div class="acciones">
+          <button id="minVideo"
+                  title="Minimizar"
+                  aria-label="Minimizar video">−</button>
+
+          <button id="maxVideo"
+                  title="Maximizar"
+                  aria-label="Maximizar video">□</button>
+
+          <button id="cerrarVideo"
+                  title="Cerrar"
+                  aria-label="Cerrar video">×</button>
+        </div>
+
+      </div>
+
+      <div class="contenido-ventana">
+
+        <div class="marco-video">
+
+          <video
+            id="reproductor"
+            controls
+            autoplay
+            muted
+            playsinline
+            preload="metadata">
+          </video>
+
+        </div>
+
+        <div class="pie-video">
+          <span class="video-indicador">
+            <span class="punto-video"></span>
+            VIDEO GRABADO
+          </span>
+
+          <span></span>
+        </div>
+
+        <p id="mensajeVideo"></p>
+
+      </div>
+
+    </section>
+
+    <!-- VENTANA DE ATRIBUTOS -->
+    <section
+      id="panelDatos"
+      class="ventana ventana-datos oculto">
+
+      <div class="barra-ventana" id="barraDatos">
+
+        <div class="titulo-ventana">
+          <span class="icono-ventana">ⓘ</span>
+
+          <div>
+            <small>DETALLE DEL PUNTO</small>
+            <h2 id="tituloDatos">
+              Información de la cámara
+            </h2>
+          </div>
+        </div>
+
+        <div class="acciones">
+          <button id="minDatos"
+                  title="Minimizar"
+                  aria-label="Minimizar datos">−</button>
+
+          <button id="cerrarDatos"
+                  title="Cerrar"
+                  aria-label="Cerrar datos">×</button>
+        </div>
+
+      </div>
+
+      <div class="contenido-ventana">
+
+        <div class="subtitulo-datos">
+          <span class="punto-estado"></span>
+          INFORMACIÓN GEOGRÁFICA
+        </div>
+
+        <div id="datosPunto"></div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <footer class="barra-inferior">
+    <span></span>
+    <span>Información cartográfica proporcionada por ArcGIS</span>
+  </footer>
+
+  <script src="https://js.arcgis.com/4.33/"></script>
+  <script src="script.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,644 @@
+
+
+:root {
+  --azul-principal: #102d49;
+  --azul-oscuro: #081b30;
+  --azul-medio: #164768;
+  --celeste: #28a9e0;
+  --celeste-claro: #e8f6fc;
+  --blanco: #ffffff;
+  --gris-fondo: #f3f7fb;
+  --gris-texto: #64748b;
+  --verde: #23d3a0;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Segoe UI", Arial, sans-serif;
+  background: var(--gris-fondo);
+  color: #1e293b;
+}
+
+/* ==================================
+   ENCABEZADO PRINCIPAL
+================================== */
+
+.encabezado {
+  height: 86px;
+  background: linear-gradient(
+    115deg,
+    #081b30,
+    #123a5b 70%,
+    #164e72
+  );
+
+  border-bottom: 3px solid var(--celeste);
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0 28px;
+  color: white;
+
+  box-shadow: 0 4px 18px rgba(0,0,0,.16);
+  position: relative;
+  z-index: 30;
+}
+
+.identidad {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.logo-sistema {
+  width: 49px;
+  height: 49px;
+  border-radius: 13px;
+  background: rgba(40,169,224,.16);
+  border: 1px solid rgba(97,202,245,.4);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: #66d1fa;
+}
+
+.logo-sistema svg {
+  width: 29px;
+  height: 29px;
+}
+
+.identidad h1 {
+  font-size: 23px;
+  font-weight: 700;
+  letter-spacing: -.5px;
+}
+
+.identidad p {
+  font-size: 12px;
+  color: #b8d2e6;
+  margin-top: 5px;
+}
+
+.indicadores-header {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+}
+
+.indicador-sistema {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+
+  padding: 10px 14px;
+  background: rgba(255,255,255,.08);
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 10px;
+
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.punto-estado {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: var(--verde);
+  box-shadow: 0 0 10px rgba(35,211,160,.6);
+}
+
+.indicador-sistema.error .punto-estado {
+  background: #ff7676;
+  box-shadow: 0 0 10px rgba(255,118,118,.5);
+}
+
+.reloj-sistema {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 3px;
+}
+
+#fechaActual {
+  color: #bad4e6;
+  font-size: 11px;
+  text-transform: capitalize;
+}
+
+#horaActual {
+  font-size: 19px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+/* ==================================
+   MAPA
+================================== */
+
+#areaTrabajo {
+  position: relative;
+  width: 100%;
+  height: calc(100vh - 116px);
+  min-height: 350px;
+  overflow: hidden;
+}
+
+#viewDiv {
+  width: 100%;
+  height: 100%;
+}
+
+.etiqueta-mapa {
+  position: absolute;
+  bottom: 34px;
+  left: 16px;
+  z-index: 5;
+
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  padding: 10px 14px;
+  border-radius: 9px;
+
+  background: rgba(8,27,48,.91);
+  color: white;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+
+  pointer-events: none;
+}
+
+.etiqueta-punto {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--celeste);
+}
+
+/* ==================================
+   BOTONES ARCGIS
+================================== */
+
+.esri-ui-top-right {
+  top: 10px;
+  right: 10px;
+}
+
+.esri-expand__container .esri-widget--button {
+  width: 48px !important;
+  height: 48px !important;
+  border-radius: 11px !important;
+}
+
+.esri-expand__container .esri-icon {
+  font-size: 25px !important;
+}
+
+.esri-expand__container .esri-icon-layers {
+  font-size: 25px !important;
+}
+
+.esri-widget--button {
+  border-radius: 9px;
+}
+
+.esri-layer-list {
+  max-height: 360px;
+  overflow-y: auto;
+}
+
+.esri-expand__content {
+  max-width: min(350px, 85vw);
+}
+
+/* ==================================
+   VENTANAS FLOTANTES
+================================== */
+
+.ventana {
+  position: absolute;
+  z-index: 20;
+
+  background: var(--blanco);
+  border: 1px solid rgba(20,65,100,.12);
+  border-radius: 15px;
+
+  box-shadow:
+    0 16px 40px rgba(8,27,48,.19),
+    0 3px 10px rgba(8,27,48,.08);
+
+  overflow: hidden;
+  min-width: 260px;
+  max-width: 100%;
+
+  animation: aparecer .24s ease-out;
+}
+
+.ventana-video {
+  width: 650px;
+  max-width: calc(100% - 30px);
+  top: 18px;
+  right: 18px;
+}
+
+.ventana-datos {
+  width: 400px;
+  max-width: calc(100% - 30px);
+  max-height: 85%;
+  top: 18px;
+  left: 18px;
+
+  display: flex;
+  flex-direction: column;
+}
+
+/* ==================================
+   CABECERAS DE VENTANAS
+================================== */
+
+.barra-ventana {
+  min-height: 65px;
+
+  background: linear-gradient(
+    110deg,
+    #0b263e,
+    #174b70
+  );
+
+  color: white;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+
+  padding: 11px 15px;
+
+  cursor: move;
+  user-select: none;
+  touch-action: none;
+
+  border-bottom: 2px solid var(--celeste);
+}
+
+.titulo-ventana {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  min-width: 0;
+}
+
+.icono-ventana {
+  width: 35px;
+  height: 35px;
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 9px;
+  background: rgba(75,189,239,.15);
+  border: 1px solid rgba(75,189,239,.28);
+
+  color: #8bddff;
+  font-size: 18px;
+}
+
+.titulo-ventana small {
+  display: block;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1.1px;
+  color: #90cce9;
+  margin-bottom: 4px;
+}
+
+.titulo-ventana h2 {
+  font-size: 15px;
+  font-weight: 650;
+  overflow-wrap: anywhere;
+}
+
+/* ==================================
+   BOTONES DE VENTANAS
+================================== */
+
+.acciones {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.acciones button {
+  width: 30px;
+  height: 30px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid rgba(255,255,255,.1);
+  border-radius: 7px;
+
+  background: rgba(255,255,255,.1);
+  color: white;
+
+  font-size: 18px;
+  cursor: pointer;
+
+  transition: background .2s, transform .2s;
+}
+
+.acciones button:hover {
+  background: rgba(40,169,224,.4);
+  transform: translateY(-1px);
+}
+
+#cerrarVideo:hover,
+#cerrarDatos:hover {
+  background: #c93b4b;
+}
+
+/* ==================================
+   CONTENIDO DE VENTANAS
+================================== */
+
+.contenido-ventana {
+  padding: 15px;
+  overflow: auto;
+}
+
+.ventana-datos .contenido-ventana {
+  min-height: 0;
+}
+
+/* ==================================
+   VIDEO
+================================== */
+
+.marco-video {
+  padding: 5px;
+  background: #071522;
+  border: 1px solid #1c405c;
+  border-radius: 10px;
+}
+
+#reproductor {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+
+  object-fit: contain;
+  background: #000;
+  border-radius: 6px;
+}
+
+.pie-video {
+  margin-top: 13px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+
+  font-size: 10px;
+  color: var(--gris-texto);
+}
+
+.video-indicador {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+
+  font-weight: 700;
+  letter-spacing: .7px;
+  color: #24749a;
+}
+
+.punto-video {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--celeste);
+}
+
+#mensajeVideo {
+  margin-top: 10px;
+  font-size: 13px;
+  color: #b42318;
+  overflow-wrap: anywhere;
+}
+
+#mensajeVideo:empty {
+  display: none;
+}
+
+/* ==================================
+   PANEL DE INFORMACION
+================================== */
+
+.subtitulo-datos {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+
+  background: var(--celeste-claro);
+  color: #1a6488;
+
+  border-radius: 8px;
+  padding: 11px 12px;
+
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1px;
+
+  margin-bottom: 8px;
+}
+
+.fila-dato {
+  padding: 12px 4px;
+  border-bottom: 1px solid #e6edf3;
+  overflow-wrap: anywhere;
+}
+
+.fila-dato:last-child {
+  border-bottom: none;
+}
+
+.fila-dato strong {
+  display: block;
+  margin-bottom: 5px;
+
+  color: #235372;
+  font-size: 11px;
+  font-weight: 750;
+  text-transform: uppercase;
+}
+
+.fila-dato span {
+  display: block;
+  color: #34465a;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+/* ==================================
+   ESTADOS DE VENTANAS
+================================== */
+
+.minimizada .contenido-ventana {
+  display: none;
+}
+
+.maximizada {
+  top: 10px !important;
+  left: 10px !important;
+  right: auto !important;
+
+  width: calc(100% - 20px) !important;
+  height: calc(100% - 20px);
+
+  display: flex;
+  flex-direction: column;
+}
+
+.maximizada .contenido-ventana {
+  flex: 1;
+  min-height: 0;
+}
+
+.maximizada .marco-video {
+  height: calc(100% - 35px);
+}
+
+.maximizada #reproductor {
+  height: 100%;
+  aspect-ratio: auto;
+}
+
+.oculto {
+  display: none !important;
+}
+
+/* ==================================
+   BARRA INFERIOR
+================================== */
+
+.barra-inferior {
+  height: 30px;
+  padding: 0 18px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  background: #0b263e;
+  color: #aac5d7;
+
+  font-size: 10px;
+  letter-spacing: .2px;
+}
+
+/* ==================================
+   ANIMACIONES
+================================== */
+
+@keyframes aparecer {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* ==================================
+   RESPONSIVE
+================================== */
+
+@media (max-width: 700px) {
+
+  .encabezado {
+    height: 80px;
+    padding: 0 12px;
+  }
+
+  .logo-sistema {
+    width: 40px;
+    height: 40px;
+  }
+
+  .identidad {
+    gap: 9px;
+  }
+
+  .identidad h1 {
+    font-size: 16px;
+  }
+
+  .identidad p {
+    font-size: 10px;
+  }
+
+  .indicador-sistema {
+    display: none;
+  }
+
+  .reloj-sistema {
+    gap: 2px;
+  }
+
+  #fechaActual {
+    display: none;
+  }
+
+  #horaActual {
+    font-size: 12px;
+  }
+
+  #areaTrabajo {
+    height: calc(100vh - 110px);
+  }
+
+  .ventana-video {
+    width: calc(100% - 20px);
+    right: 10px;
+    top: 10px;
+  }
+
+  .ventana-datos {
+    width: calc(100% - 20px);
+    left: 10px;
+    top: 80px;
+  }
+
+  .barra-ventana {
+    padding: 9px 11px;
+  }
+
+  .titulo-ventana h2 {
+    font-size: 13px;
+  }
+
+  .barra-inferior span:last-child {
+    display: none;
+  }
+}
